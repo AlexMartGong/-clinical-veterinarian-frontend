@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {Typography, Grid, Paper, Box} from '@mui/material';
+import {Typography, Grid2, Paper, Box} from '@mui/material';
 import {Pets, People, EventNote, MedicalServices} from '@mui/icons-material';
 import {AuthContext} from '../context/AuthContext';
 
@@ -21,7 +21,7 @@ const StatCard = ({icon, title, value, color}) => {
                     {title}
                 </Typography>
             </Box>
-            <Typography variant="h4" component="p" fontWeight="bold">
+            <Typography variant="h4" component="div" sx={{fontWeight: 'bold'}}>
                 {value}
             </Typography>
         </Paper>
@@ -33,50 +33,50 @@ const DashboardPage = () => {
 
     return (
         <Box>
-            <Typography variant="h4" component="h1" gutterBottom>
+            <Typography variant="h4" component="h1" sx={{mb: 2}}>
                 Bienvenido, {user?.sub || 'Usuario'}
             </Typography>
-            <Typography variant="body1" color="text.secondary" paragraph>
+            <Typography variant="body1" color="text.secondary" sx={{mb: 2}}>
                 Resumen general del sistema de gestión veterinaria
             </Typography>
 
-            <Grid container spacing={3} mt={2}>
-                <Grid item xs={12} sm={6} md={3}>
+            <Grid2 container spacing={3} sx={{mt: 2}}>
+                <Grid2 item xs={12} sm={6} md={3}>
                     <StatCard
                         icon={<Pets/>}
                         title="Mascotas Registradas"
                         value="152"
                         color="primary"
                     />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                </Grid2>
+                <Grid2 item xs={12} sm={6} md={3}>
                     <StatCard
                         icon={<People/>}
                         title="Propietarios"
                         value="87"
                         color="secondary"
                     />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                </Grid2>
+                <Grid2 item xs={12} sm={6} md={3}>
                     <StatCard
                         icon={<MedicalServices/>}
                         title="Consultas del Mes"
                         value="34"
                         color="success"
                     />
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
+                </Grid2>
+                <Grid2 item xs={12} sm={6} md={3}>
                     <StatCard
                         icon={<EventNote/>}
                         title="Vacunas Pendientes"
                         value="12"
                         color="warning"
                     />
-                </Grid>
-            </Grid>
+                </Grid2>
+            </Grid2>
 
-            <Box mt={4}>
-                <Typography variant="h5" component="h2" gutterBottom>
+            <Box sx={{mt: 4}}>
+                <Typography variant="h5" component="h2" sx={{mb: 2}}>
                     Actividad Reciente
                 </Typography>
                 <Paper elevation={2} sx={{p: 3, borderRadius: 2}}>

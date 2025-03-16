@@ -1,6 +1,7 @@
 import {createContext, useState, useEffect} from 'react';
 import {jwtDecode} from 'jwt-decode';
 import axios from 'axios';
+import {login as authServiceLogin} from '../api/authService';
 
 export const AuthContext = createContext();
 
@@ -41,8 +42,9 @@ export const AuthProvider = ({children}) => {
 
     const login = async (username, password) => {
         try {
-            const response = await axios.post('/api/login', {username, password});
-            const {token} = response.data;
+            // Use the login function from authService
+            const response = await authServiceLogin(username, password);
+            const {token} = response;
             localStorage.setItem('token', token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             const decoded = jwtDecode(token);
