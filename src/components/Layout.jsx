@@ -123,7 +123,7 @@ const Layout = () => {
                     <Divider/>
                     <List>
                         {menuItems.map((item) => (
-                            <ListItem button key={item.text} onClick={item.onClick}>
+                            <ListItem key={item.text} onClick={item.onClick} sx={{cursor: 'pointer'}}>
                                 <ListItemIcon>
                                     {item.icon}
                                 </ListItemIcon>
@@ -133,7 +133,7 @@ const Layout = () => {
                     </List>
                     <Divider/>
                     <List>
-                        <ListItem button onClick={handleLogout}>
+                        <ListItem onClick={handleLogout} sx={{cursor: 'pointer'}}>
                             <ListItemIcon>
                                 <Logout/>
                             </ListItemIcon>

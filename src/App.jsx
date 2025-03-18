@@ -7,6 +7,8 @@ import LoginPage from './pages/LoginPage';
 import DashboardPage from './pages/DashboardPage';
 import {ThemeProvider, createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import OwnersPage from "./pages/OwnersPage.jsx";
+import OwnerDetailsPage from "./pages/OwnerDetailsPage.jsx";
 
 
 const theme = createTheme({
@@ -35,7 +37,9 @@ function App() {
                             </ProtectedRoute>
                         }>
                             <Route index element={<DashboardPage/>}/>
-                            {/* Aquí irían rutas adicionales protegidas */}
+                            <Route path="owners" element={<OwnersPage/>}/> {/* Añadir esta línea */}
+                            <Route path="owners/:id" element={<OwnerDetailsPage/>}/> {/* Para ver detalles */}
+                            {/* Otras rutas protegidas */}
                             <Route path="*" element={<div>Página no encontrada</div>}/>
                         </Route>
                     </Routes>
