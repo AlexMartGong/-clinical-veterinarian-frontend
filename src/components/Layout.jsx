@@ -47,8 +47,8 @@ const Layout = () => {
 
     const menuItems = [
         {text: 'Dashboard', icon: <Dashboard/>, onClick: () => navigate('/')},
-        {text: 'Mascotas', icon: <Pets/>, onClick: () => navigate('/pets')},
         {text: 'Propietarios', icon: <People/>, onClick: () => navigate('/owners')},
+        {text: 'Mascotas', icon: <Pets/>, onClick: () => navigate('/pets')},
         {text: 'Consultas', icon: <MedicalServices/>, onClick: () => navigate('/consultations')},
         {text: 'Vacunación', icon: <Event/>, onClick: () => navigate('/vaccinations')},
     ];
