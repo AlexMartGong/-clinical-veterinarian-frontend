@@ -5,7 +5,7 @@ import {
     Typography,
     Paper,
     Divider,
-    Grid,
+    Grid2,
     Button,
     Chip,
     List,
@@ -114,8 +114,8 @@ const OwnerDetailsPage = () => {
                 </Box>
                 <Divider sx={{ mb: 3 }} />
 
-                <Grid container spacing={3}>
-                    <Grid item xs={12} md={6}>
+                <Grid2 container spacing={3}>
+                    <Grid2 item xs={12} md={6}>
                         <Box display="flex" alignItems="center" mb={2}>
                             <Person sx={{ mr: 1, color: 'primary.main' }} />
                             <Typography variant="subtitle1" component="span" fontWeight="bold">
@@ -145,9 +145,9 @@ const OwnerDetailsPage = () => {
                                 {owner.email || 'No disponible'}
                             </Typography>
                         </Box>
-                    </Grid>
+                    </Grid2>
 
-                    <Grid item xs={12} md={6}>
+                    <Grid2 item xs={12} md={6}>
                         <Box display="flex" alignItems="center" mb={2}>
                             <LocationOn sx={{ mr: 1, color: 'primary.main' }} />
                             <Typography variant="subtitle1" component="span" fontWeight="bold">
@@ -171,8 +171,8 @@ const OwnerDetailsPage = () => {
                                 </Box>
                             </Box>
                         )}
-                    </Grid>
-                </Grid>
+                    </Grid2>
+                </Grid2>
             </Paper>
 
             <Paper sx={{ p: 3 }}>

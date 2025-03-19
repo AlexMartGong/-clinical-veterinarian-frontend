@@ -9,6 +9,11 @@ import {ThemeProvider, createTheme} from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import OwnersPage from "./pages/OwnersPage.jsx";
 import OwnerDetailsPage from "./pages/OwnerDetailsPage.jsx";
+import PetsPage from "./pages/PetsPage.jsx";
+import PetDetailsPage from "./pages/PetDetailsPage.jsx";
+import {LocalizationProvider} from '@mui/x-date-pickers';
+import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
+import {es} from 'date-fns/locale';
 
 
 const theme = createTheme({
@@ -26,25 +31,33 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <AuthProvider>
-                <BrowserRouter>
-                    <Toaster position="top-right"/>
-                    <Routes>
-                        <Route path="/login" element={<LoginPage/>}/>
-                        <Route path="/" element={
-                            <ProtectedRoute>
-                                <Layout/>
-                            </ProtectedRoute>
-                        }>
-                            <Route index element={<DashboardPage/>}/>
-                            <Route path="owners" element={<OwnersPage/>}/> {/* Añadir esta línea */}
-                            <Route path="owners/:id" element={<OwnerDetailsPage/>}/> {/* Para ver detalles */}
-                            {/* Otras rutas protegidas */}
-                            <Route path="*" element={<div>Página no encontrada</div>}/>
-                        </Route>
-                    </Routes>
-                </BrowserRouter>
-            </AuthProvider>
+            <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={es}>
+                <AuthProvider>
+                    <BrowserRouter>
+                        <Toaster position="top-right"/>
+                        <Routes>
+                            <Route path="/login" element={<LoginPage/>}/>
+                            <Route path="/" element={
+                                <ProtectedRoute>
+                                    <Layout/>
+                                </ProtectedRoute>
+                            }>
+                                <Route index element={<DashboardPage/>}/>
+                                {/* Rutas de propietarios */}
+                                <Route path="owners" element={<OwnersPage/>}/>
+                                <Route path="owners/:id" element={<OwnerDetailsPage/>}/>
+
+                                {/* Rutas de mascotas */}
+                                <Route path="pets" element={<PetsPage/>}/>
+                                <Route path="pets/:id" element={<PetDetailsPage/>}/>
+
+                                {/* Otras rutas protegidas */}
+                                <Route path="*" element={<div>Página no encontrada</div>}/>
+                            </Route>
+                        </Routes>
+                    </BrowserRouter>
+                </AuthProvider>
+            </LocalizationProvider>
         </ThemeProvider>
     );
 }
