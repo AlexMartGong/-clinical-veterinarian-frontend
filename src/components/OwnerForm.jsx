@@ -6,7 +6,7 @@ import {
     DialogActions,
     Button,
     TextField,
-    Grid,
+    Grid2,
     CircularProgress
 } from '@mui/material';
 import {toast} from 'react-hot-toast';
@@ -84,8 +84,8 @@ const OwnerForm = ({open, owner, onClose, onSubmitResult}) => {
                 {({errors, touched, isSubmitting}) => (
                     <Form>
                         <DialogContent>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} md={6}>
+                            <Grid2 container spacing={2}>
+                                <Grid2 item xs={12} md={6}>
                                     <Field
                                         as={TextField}
                                         name="fullName"
@@ -95,8 +95,8 @@ const OwnerForm = ({open, owner, onClose, onSubmitResult}) => {
                                         error={touched.fullName && Boolean(errors.fullName)}
                                         helperText={touched.fullName && errors.fullName}
                                     />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
+                                </Grid2>
+                                <Grid2 item xs={12} md={6}>
                                     <Field
                                         as={TextField}
                                         name="phone"
@@ -106,8 +106,8 @@ const OwnerForm = ({open, owner, onClose, onSubmitResult}) => {
                                         error={touched.phone && Boolean(errors.phone)}
                                         helperText={touched.phone && errors.phone}
                                     />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
+                                </Grid2>
+                                <Grid2 item xs={12} md={6}>
                                     <Field
                                         as={TextField}
                                         name="email"
@@ -117,8 +117,8 @@ const OwnerForm = ({open, owner, onClose, onSubmitResult}) => {
                                         error={touched.email && Boolean(errors.email)}
                                         helperText={touched.email && errors.email}
                                     />
-                                </Grid>
-                                <Grid item xs={12} md={6}>
+                                </Grid2>
+                                <Grid2 item xs={12} md={6}>
                                     <Field
                                         as={TextField}
                                         name="address"
@@ -128,8 +128,8 @@ const OwnerForm = ({open, owner, onClose, onSubmitResult}) => {
                                         error={touched.address && Boolean(errors.address)}
                                         helperText={touched.address && errors.address}
                                     />
-                                </Grid>
-                                <Grid item xs={12}>
+                                </Grid2>
+                                <Grid2 item xs={12}>
                                     <Field
                                         as={TextField}
                                         name="notes"
@@ -141,8 +141,8 @@ const OwnerForm = ({open, owner, onClose, onSubmitResult}) => {
                                         error={touched.notes && Boolean(errors.notes)}
                                         helperText={touched.notes && errors.notes}
                                     />
-                                </Grid>
-                            </Grid>
+                                </Grid2>
+                            </Grid2>
                         </DialogContent>
                         <DialogActions>
                             <Button onClick={onClose} disabled={loading}>
