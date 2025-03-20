@@ -19,15 +19,11 @@ import {
     Box,
     Avatar
 } from '@mui/material';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import {AdapterDateFns} from '@mui/x-date-pickers/AdapterDateFns';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {es} from 'date-fns/locale';
 import {toast} from 'react-hot-toast';
 import {savePet, getAllSpecies, getAllBreeds} from '../api/petService';
 import {getAllOwners} from '../api/ownerService';
 import * as Yup from 'yup';
-import {Formik, Form, Field, ErrorMessage} from 'formik';
+import {Formik, Form, Field} from 'formik';
 import {Pets, Upload} from '@mui/icons-material';
 
 // Validation schema
@@ -70,7 +66,7 @@ const PetForm = ({open, pet, onClose, onSubmitResult}) => {
     const [filteredBreeds, setFilteredBreeds] = useState([]);
     const isEditing = Boolean(pet);
 
-    // Fetch owners, species and breeds
+// En el useEffect donde cargas los datos
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -79,12 +75,16 @@ const PetForm = ({open, pet, onClose, onSubmitResult}) => {
                     getAllSpecies(),
                     getAllBreeds()
                 ]);
-                setOwners(ownersData);
-                setSpecies(speciesData);
-                setBreeds(breedsData);
+                setOwners(Array.isArray(ownersData) ? ownersData : []);
+                setSpecies(Array.isArray(speciesData) ? speciesData : []);
+                setBreeds(Array.isArray(breedsData) ? breedsData : []);
             } catch (error) {
                 console.error('Error fetching form data:', error);
                 toast.error('Error al cargar los datos del formulario');
+                // Asegúrate de establecer arrays vacíos en caso de error
+                setOwners([]);
+                setSpecies([]);
+                setBreeds([]);
             }
         };
 
@@ -262,9 +262,9 @@ const PetForm = ({open, pet, onClose, onSubmitResult}) => {
                                             <MenuItem value="">
                                                 <em>Seleccione una especie</em>
                                             </MenuItem>
-                                            {species.map((species) => (
-                                                <MenuItem key={species.id} value={species.id}>
-                                                    {species.name}
+                                            {Array.isArray(species) && species.map((specie) => (
+                                                <MenuItem key={specie.id} value={specie.id}>
+                                                    {specie.name}
                                                 </MenuItem>
                                             ))}
                                         </Select>
@@ -303,22 +303,25 @@ const PetForm = ({open, pet, onClose, onSubmitResult}) => {
                                 </Grid2>
 
                                 <Grid2 item xs={12} md={6}>
-                                    <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={es}>
-                                        <DatePicker
-                                            label="Fecha de Nacimiento"
-                                            value={values.birthDate}
-                                            onChange={(date) => setFieldValue('birthDate', date)}
-                                            maxDate={new Date()}
-                                            slotProps={{
-                                                textField: {
-                                                    fullWidth: true,
-                                                    variant: 'outlined',
-                                                    error: touched.birthDate && Boolean(errors.birthDate),
-                                                    helperText: touched.birthDate && errors.birthDate
-                                                }
-                                            }}
-                                        />
-                                    </LocalizationProvider>
+                                    <TextField
+                                        fullWidth
+                                        variant="outlined"
+                                        id="birthDate"
+                                        name="birthDate"
+                                        label="Fecha de Nacimiento"
+                                        type="date"
+                                        InputLabelProps={{shrink: true}}
+                                        inputProps={{
+                                            max: new Date().toISOString().split('T')[0]
+                                        }}
+                                        value={values.birthDate ? new Date(values.birthDate).toISOString().split('T')[0] : ''}
+                                        onChange={(e) => {
+                                            const date = e.target.value ? new Date(e.target.value) : null;
+                                            setFieldValue('birthDate', date);
+                                        }}
+                                        error={touched.birthDate && Boolean(errors.birthDate)}
+                                        helperText={touched.birthDate && errors.birthDate}
+                                    />
                                 </Grid2>
 
                                 <Grid2 item xs={12} md={6}>
